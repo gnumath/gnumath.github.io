@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>G.GUI Portal</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>G.GUI Games</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="landing">
+<body>
 
-<div class="center-wrapper">
-    <a href="epics.html" class="portal-button">
-        HOP IN
-    </a>
-</div>
+<header class="topbar">
+    <h1>G.GUI Games<span class="slash">/div&gt;</span></h1>
+    <button class="settings-btn">Settings</button>
+</header>
 
+<main class="container">
+    <section class="zone">
+        <h2>Featured Zones</h2>
+        <div class="game-grid" id="featured-games"></div>
+    </section>
+
+    <section class="zone">
+        <h2>All Zones</h2>
+        <div class="game-grid" id="all-games"></div>
+    </section>
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>
