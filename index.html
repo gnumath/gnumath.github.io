@@ -7,34 +7,42 @@
 </head>
 <body>
 
-<header>
-    <div class="header-content">
-        <div class="logo">G.GUI Games<span class="slash">/div&gt;</span></div>
-        <button id="settings">Settings</button>
+<header class="navbar">
+    <div class="nav-left">
+        <div class="logo">G.GUI Games</div>
+    </div>
+
+    <div class="nav-center">
+        <input 
+            type="text" 
+            id="searchBar" 
+            placeholder="Search zones..."
+            oninput="filterZones()"
+        >
+
+        <select id="sortOptions" onchange="sortZones()">
+            <option value="id">Sort by ID</option>
+            <option value="name">Sort by Name</option>
+            <option value="popular">Sort by Popularity</option>
+        </select>
+    </div>
+
+    <div class="nav-right">
+        <button class="nav-button" id="settings">Settings</button>
     </div>
 </header>
 
 <!-- FEATURED -->
 <details id="featuredZonesWrapper" open>
-    <summary id="allZonesSummary">Featured Zones</summary>
+    <summary class="section-title">Featured Zones</summary>
     <div class="zone-container" id="featuredZones"></div>
 </details>
 
 <!-- ALL ZONES -->
 <details open>
-    <summary id="allSummary">All Zones</summary>
+    <summary class="section-title">All Zones</summary>
     <div id="container"></div>
 </details>
-
-<!-- SEARCH + SORT -->
-<div style="padding: 1rem 2rem;">
-    <input type="text" id="searchBar" placeholder="Search zones..." oninput="filterZones()">
-    <select id="sortOptions" onchange="sortZones()">
-        <option value="id">Sort by ID</option>
-        <option value="name">Sort by Name</option>
-        <option value="popular">Sort by Popularity</option>
-    </select>
-</div>
 
 <!-- ZONE VIEWER -->
 <div id="zoneViewer">
@@ -44,6 +52,7 @@
             <p>ID: <span id="zoneId"></span></p>
             <a id="zoneAuthor" target="_blank"></a>
         </div>
+
         <div class="zone-controls">
             <button onclick="fullscreenZone()">Fullscreen</button>
             <button onclick="aboutBlank()">About:Blank</button>
@@ -51,15 +60,15 @@
             <button onclick="closeZone()">Close</button>
         </div>
     </div>
-    <iframe id="zoneFrame" style="flex:1; border:none;"></iframe>
+
+    <iframe id="zoneFrame"></iframe>
 </div>
 
-<!-- POPUP OVERLAY -->
-<div id="popupOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
-    <div style="background:#111; padding:2rem; border-radius:16px; width:400px;">
+<!-- POPUP -->
+<div id="popupOverlay">
+    <div class="popup-box">
         <h2 id="popupTitle"></h2>
         <div id="popupBody"></div>
-        <br>
         <button onclick="closePopup()">Close</button>
     </div>
 </div>
