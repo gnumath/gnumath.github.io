@@ -112,12 +112,13 @@ body {
 }
 
 /* ==========================
-   GAME BUTTONS (REAL GLOW)
+   GAME BUTTONS (CONTROLLED GLOW)
 ========================== */
 
 .zone-item button {
     all: unset;
     display: block;
+    width: 100%;
     text-align: center;
     padding: 1.2rem;
     font-weight: 600;
@@ -126,42 +127,55 @@ body {
     background: var(--bg-soft);
     border-radius: 0 0 var(--radius) var(--radius);
     overflow: hidden;
-    transition: transform 0.35s ease;
+
     transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(.2,.8,.2,1);
 }
 
-/* Tilt */
+/* Keep text above glow */
+.zone-item button span {
+    position: relative;
+    z-index: 2;
+}
+
+/* Tilt with depth */
 .zone-item button:hover {
-    transform: perspective(500px) rotateX(8deg) rotateY(-8deg) scale(1.05);
+    transform:
+        perspective(700px)
+        rotateX(10deg)
+        rotateY(-10deg)
+        translateY(-4px)
+        scale(1.05);
 }
 
-/* Moving internal glow */
+/* Moving internal energy layer */
 .zone-item button::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        130deg,
+    inset: -50%;
+    background: conic-gradient(
+        from 0deg,
         var(--pink),
         var(--purple),
         var(--cyan),
         var(--pink)
     );
-    background-size: 300% 300%;
-    animation: flow 4s linear infinite;
+    animation: spin 6s linear infinite;
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 1;
 }
 
+/* Fade in glow */
 .zone-item button:hover::before {
-    opacity: 0.35;
+    opacity: 0.25;
 }
 
-/* Outer halo */
+/* Controlled outer halo */
 .zone-item button::after {
     content: "";
     position: absolute;
-    inset: -6px;
+    inset: -4px;
     border-radius: inherit;
     background: linear-gradient(
         120deg,
@@ -169,14 +183,20 @@ body {
         var(--purple),
         var(--cyan)
     );
-    filter: blur(18px);
-    z-index: -1;
+    filter: blur(20px);
     opacity: 0;
+    z-index: -1;
     transition: opacity 0.3s ease;
 }
 
 .zone-item button:hover::after {
-    opacity: 1;
+    opacity: 0.8;
+}
+
+/* Spin animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* ==========================
