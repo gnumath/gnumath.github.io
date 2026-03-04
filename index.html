@@ -2,27 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>G.GUI Games</title>
+    <title>gn-math</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header class="topbar">
-    <h1>G.GUI Games<span class="slash">/div&gt;</span></h1>
-    <button class="settings-btn">Settings</button>
+<header>
+    <div class="header-content">
+        <div class="logo">G.GUI Games<span class="slash">/div&gt;</span></div>
+        <button id="settings">Settings</button>
+    </div>
 </header>
 
-<main class="container">
-    <section class="zone">
-        <h2>Featured Zones</h2>
-        <div class="game-grid" id="featured-games"></div>
-    </section>
+<!-- FEATURED -->
+<details id="featuredZonesWrapper" open>
+    <summary id="allZonesSummary">Featured Zones</summary>
+    <div class="zone-container" id="featuredZones"></div>
+</details>
 
-    <section class="zone">
-        <h2>All Zones</h2>
-        <div class="game-grid" id="all-games"></div>
-    </section>
-</main>
+<!-- ALL ZONES -->
+<details open>
+    <summary id="allSummary">All Zones</summary>
+    <div id="container"></div>
+</details>
+
+<!-- SEARCH + SORT -->
+<div style="padding: 1rem 2rem;">
+    <input type="text" id="searchBar" placeholder="Search zones..." oninput="filterZones()">
+    <select id="sortOptions" onchange="sortZones()">
+        <option value="id">Sort by ID</option>
+        <option value="name">Sort by Name</option>
+        <option value="popular">Sort by Popularity</option>
+    </select>
+</div>
+
+<!-- ZONE VIEWER -->
+<div id="zoneViewer">
+    <div class="zone-header">
+        <div>
+            <h2 id="zoneName"></h2>
+            <p>ID: <span id="zoneId"></span></p>
+            <a id="zoneAuthor" target="_blank"></a>
+        </div>
+        <div class="zone-controls">
+            <button onclick="fullscreenZone()">Fullscreen</button>
+            <button onclick="aboutBlank()">About:Blank</button>
+            <button onclick="downloadZone()">Download</button>
+            <button onclick="closeZone()">Close</button>
+        </div>
+    </div>
+    <iframe id="zoneFrame" style="flex:1; border:none;"></iframe>
+</div>
+
+<!-- POPUP OVERLAY -->
+<div id="popupOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); align-items:center; justify-content:center;">
+    <div style="background:#111; padding:2rem; border-radius:16px; width:400px;">
+        <h2 id="popupTitle"></h2>
+        <div id="popupBody"></div>
+        <br>
+        <button onclick="closePopup()">Close</button>
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>
