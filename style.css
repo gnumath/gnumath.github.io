@@ -1,7 +1,3 @@
-/* =====================================
-   G.GUI X GN-MATH
-===================================== */
-
 :root {
     --bg: #05070e;
     --bg-soft: #0d1324;
@@ -16,9 +12,7 @@
     --radius: 18px;
 }
 
-/* =======================
-   GLOBAL
-======================= */
+/* GLOBAL */
 
 * {
     box-sizing: border-box;
@@ -31,106 +25,70 @@ body {
     color: var(--text);
 }
 
-/* =======================
-   LANDING PAGE
-======================= */
+/* ==========================
+   NAVBAR
+========================== */
 
-.landing {
+.navbar {
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-
-.portal-button {
-    position: relative;
-    padding: 50px 110px;
-    font-size: 50px;
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
-    border-radius: var(--radius);
-    background: var(--bg-soft);
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-/* Tilt */
-.portal-button:hover {
-    transform: rotateX(8deg) rotateY(-8deg) scale(1.05);
-}
-
-/* Moving gradient inside */
-.portal-button::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        120deg,
-        var(--pink),
-        var(--purple),
-        var(--cyan),
-        var(--pink)
-    );
-    background-size: 300% 300%;
-    animation: flow 4s linear infinite;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.portal-button:hover::before {
-    opacity: 0.25;
-}
-
-/* Glow halo */
-.portal-button::after {
-    content: "";
-    position: absolute;
-    inset: -4px;
-    border-radius: inherit;
-    background: linear-gradient(
-        120deg,
-        var(--pink),
-        var(--purple),
-        var(--cyan)
-    );
-    filter: blur(15px);
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.portal-button:hover::after {
-    opacity: 1;
-}
-
-/* =======================
-   HEADER
-======================= */
-
-header {
-    padding: 1.5rem 2rem;
-}
-
-.header-content {
-    display: flex;
     justify-content: space-between;
-    align-items: center;
+    padding: 1.2rem 2rem;
+    background: rgba(10, 15, 30, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .logo {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     font-weight: 700;
 }
 
-/* =======================
+.nav-center {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#searchBar,
+#sortOptions {
+    padding: 0.6rem 1rem;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+}
+
+.nav-button {
+    padding: 0.6rem 1.2rem;
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    cursor: pointer;
+}
+
+/* ==========================
+   SECTION TITLES
+========================== */
+
+.section-title {
+    padding: 1rem 2rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* ==========================
    ZONE GRID
-======================= */
+========================== */
 
 .zone-container,
 #container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1.8rem;
     padding: 2rem;
 }
@@ -153,9 +111,9 @@ header {
     object-fit: cover;
 }
 
-/* ======================================
-   ACTUAL GAME BUTTONS (FORCED OVERRIDE)
-====================================== */
+/* ==========================
+   GAME BUTTONS (REAL GLOW)
+========================== */
 
 .zone-item button {
     all: unset;
@@ -168,21 +126,22 @@ header {
     background: var(--bg-soft);
     border-radius: 0 0 var(--radius) var(--radius);
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: transform 0.35s ease;
+    transform-style: preserve-3d;
 }
 
-/* Tilt effect */
+/* Tilt */
 .zone-item button:hover {
-    transform: rotateX(6deg) rotateY(-6deg) scale(1.03);
+    transform: perspective(500px) rotateX(8deg) rotateY(-8deg) scale(1.05);
 }
 
-/* Moving fill */
+/* Moving internal glow */
 .zone-item button::before {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
-        120deg,
+        130deg,
         var(--pink),
         var(--purple),
         var(--cyan),
@@ -195,14 +154,14 @@ header {
 }
 
 .zone-item button:hover::before {
-    opacity: 0.25;
+    opacity: 0.35;
 }
 
-/* Glow halo */
+/* Outer halo */
 .zone-item button::after {
     content: "";
     position: absolute;
-    inset: -4px;
+    inset: -6px;
     border-radius: inherit;
     background: linear-gradient(
         120deg,
@@ -210,7 +169,7 @@ header {
         var(--purple),
         var(--cyan)
     );
-    filter: blur(12px);
+    filter: blur(18px);
     z-index: -1;
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -220,9 +179,9 @@ header {
     opacity: 1;
 }
 
-/* =======================
+/* ==========================
    VIEWER
-======================= */
+========================== */
 
 #zoneViewer {
     position: fixed;
@@ -237,15 +196,37 @@ header {
     background: var(--bg-soft);
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
-.zone-controls .neon-button.small {
-    padding: 0.6rem 1rem;
+#zoneFrame {
+    flex: 1;
+    border: none;
 }
 
-/* =======================
+/* ==========================
+   POPUP
+========================== */
+
+#popupOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-box {
+    background: #111;
+    padding: 2rem;
+    border-radius: 16px;
+    width: 400px;
+}
+
+/* ==========================
    ANIMATION
-======================= */
+========================== */
 
 @keyframes flow {
     0% { background-position: 0% 50%; }
